@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string_view>
+#include <cassert>
 #include <optional>
+#include <vector>
+
 class split_iterator {
 public:
     split_iterator(std::string_view str, char del) {
@@ -37,9 +40,26 @@ private:
     size_t pos;
     size_t next;
 };
+void split_iterator_test(const std::string_view& input, char del, const std::vector<std::string>& expected){
+    std::vector<std::string> result;
+    for (auto it = split_iterator(input, del); it != split_iterator(); ++it) {
+        result.push_back(std::string(*it));
+    }
+    assert(result == expected);
+    std::cout << "Test passed" << std::endl;
+};
 int main() {
     std::string_view s = "a,,bсd,";
-
+    std::string_view a = "";
+    std::string_view b = "aaa";
+    std::string_view c = "abcd,";
+    std::string_view d = ",,,,cdv";
+    std::string_view e = ",acdok";
+    split_iterator_test(a, ',', {});
+    split_iterator_test(b, ',', {"aaa"});
+    split_iterator_test(c, ',', {"abcd", ""});
+    split_iterator_test(d, ',', {"","","","","cdv"});
+    split_iterator_test(e, ',',{"", "acdok"});
     split_iterator it{s, ','};   // итератор на начало
     split_iterator end{};        // итератор-конец
 
