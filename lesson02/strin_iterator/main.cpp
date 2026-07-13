@@ -40,7 +40,7 @@ private:
     size_t pos;
     size_t next;
 };
-void split_iterator_test(const std::string_view& input, char del, const std::vector<std::string>& expected){
+void split_iterator_test(const std::string_view input, char del, const std::vector<std::string>& expected){
     std::vector<std::string> result;
     for (auto it = split_iterator(input, del); it != split_iterator(); ++it) {
         result.push_back(std::string(*it));
@@ -49,18 +49,14 @@ void split_iterator_test(const std::string_view& input, char del, const std::vec
     std::cout << "Test passed" << std::endl;
 };
 int main() {
-    std::string_view s = "a,,bсd,";
-    std::string_view a = "";
-    std::string_view b = "aaa";
-    std::string_view c = "abcd,";
-    std::string_view d = ",,,,cdv";
-    std::string_view e = ",acdok";
-    split_iterator_test(a, ',', {});
-    split_iterator_test(b, ',', {"aaa"});
-    split_iterator_test(c, ',', {"abcd", ""});
-    split_iterator_test(d, ',', {"","","","","cdv"});
-    split_iterator_test(e, ',',{"", "acdok"});
-    split_iterator it{s, ','};   // итератор на начало
+    split_iterator_test("", ',', {});
+    split_iterator_test("aaa", ',', {"aaa"});
+    split_iterator_test("abcd,", ',', {"abcd", ""});
+    split_iterator_test(",,,,cdv", ',', {"","","","","cdv"});
+    split_iterator_test(",acdok", ',',{"", "acdok"});
+    split_iterator_test("a", ',', {"a"});
+    split_iterator_test("b,a", ',', {"b","a"});
+    split_iterator it{"a,,bсd,", ','};   // итератор на начало
     split_iterator end{};        // итератор-конец
 
     for (; it != end; ++it) {
