@@ -1,8 +1,6 @@
 //
 // Created by nikita on 21.06.2026.
 //
-
-
 #include <iostream>
 
 int id(const int&){std::cout << "const&\n"; return 1;}
