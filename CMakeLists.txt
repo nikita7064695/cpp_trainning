@@ -5,4 +5,5 @@ set(CMAKE_CXX_STANDARD 20)
 
 
 add_subdirectory(lesson01)
+add_subdirectory(lesson02)
 add_subdirectory(lesson03)
