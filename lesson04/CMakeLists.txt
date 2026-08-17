@@ -1,0 +1,1 @@
+add_executable(dyn_mas main.cpp)
